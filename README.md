@@ -31,3 +31,12 @@ Copy the provided .env.example to a new file named .env:
 ### Step 2: Configure Variables
 Edit your .env file based on your current phase.
 (Refer to .env.example for the required format.)
+
+## 🛠️ Libraries & Rationale
+    Key Decision: I prioritized Industry-Standard Libraries to focus on scalable system design and probelm-solving rather than low-level implementation.
+
+| Library | Role | Selection Rationale (vs. Alternative) |
+| :--- | :--- | :--- |
+| LangChain | AI Orchestration | Chosen for its vast ecosystem and modularity over LlamaIndex (too data-specific) |
+| Ollama | Local Runtime | Selected for its CLI-centric workflow and ease of integration vs. LM Studio (GUI-only) |
+| python-dotenv | Security | The industry standard for secure credential management over manual os parsing |
