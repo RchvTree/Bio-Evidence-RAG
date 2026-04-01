@@ -40,3 +40,18 @@ Edit your .env file based on your current phase.
 | LangChain | AI Orchestration | Chosen for its vast ecosystem and modularity over LlamaIndex (too data-specific) |
 | Ollama | Local Runtime | Selected for its CLI-centric workflow and ease of integration vs. LM Studio (GUI-only) |
 | python-dotenv | Security | The industry standard for secure credential management over manual os parsing |
+
+
+## 🚀 Core Functions
+### engine.py
+**get_llm()**
+
+    - Description
+        : Initializes and returns the ChatOllama language model instance.
+    
+    - Key Features
+        : Automatically loads environment variables from a .env file using dotenv.
+        : Configures the model parameters (e.g., model name, temperature) for consistent responses.
+    
+    - Usage
+        : Used throughout the engine to process prompts and generate AI responses.

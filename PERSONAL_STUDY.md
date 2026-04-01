@@ -131,4 +131,53 @@ This section outlines the core libraries used in this project and technical reas
 
     - Why this tool?
         : It is the industry standard for simplicity. It ensures security with minimal code, allowing me to focus on the core AI logic without worrying about credential leaks.
-    
+
+**4. langchain_core -> Standard Interface**
+
+Defining the "Rulebook" for messages, LCEL, and parsers.
+
+    - ChatPromptTemplate
+        : A tool for Prompt Engineering that structures instructions for the AI.
+
+        - Prompting Strategy: Raw Strings vs. ChatPromptTemplate
+            : While LLMs can understand simple Python strings, using ChatPromptTemplate is the professional standard for the following reasons:
+
+                - Role Management
+                : Clearly distinguishes between System, Human, and AI roles for better persona maintenance.
+            
+                - Variable Injection
+                : Safely and cleanly injects dynamic inputs (e.g., {topics}) into prompts.
+
+                - LCEL Compatibility
+                : Designed to work seamlessly with the LangChain Expression Language (| pipe syntax) for modularity.
+
+    - JsonOutputParser
+        : Converts natural lnaguage AI responses into machine-readable JSON format.
+
+
+
+
+## 🚀 Project Progress
+### 🧠 engine.py
+**get_llm()**
+1. Code Structure
+
+The get_llm() function serves as the Entry Point for our AI model. It ensures that the model is always initialized with the correct security settings.
+
+2. Technical Decisions
+
+- Environment Loading
+
+    : By calling load_dotenv() inside the function, we guarantee that the API keys and configurations are avaliable before the model starts.
+
+- Error Prevention
+
+    : Centralizing the LLM creation prevents redundant code and makes it easier to swap models (e.g., switching from Llama 3.2 to another model) in one place.
+
+3. What I Learned
+
+- How to bridge the gap between local system files (.env) and Python code using the os module.
+
+- The importance of Encapsulation
+
+    : Wrapping model creation in a function keeps the rest of the code clean.
