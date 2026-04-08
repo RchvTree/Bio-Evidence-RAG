@@ -181,3 +181,36 @@ The get_llm() function serves as the Entry Point for our AI model. It ensures th
 - The importance of Encapsulation
 
     : Wrapping model creation in a function keeps the rest of the code clean.
+
+**extract_entities(text)**
+1. Code Structure
+
+The extract_entities(text) function is the core logic for processing unstructured bio-medical text. It transforms raw input into structured JSON data containing specific entities like 'Diseases' and 'Drugs' by orchestrating a LangChain pipeline.
+
+2. Technical Decisions
+
+- System Prompting (Expert Persona)
+
+    : By assigning the role of a "Professional Bio-NLP assistant", we ensure the LLM understands the specialized medical context and adheres strictly to the required JSON output format.
+
+- LCEL (LangChain Expression Language) Orchestration
+
+    : Usint the | (pipe) operator simplifies the complex workflow (Prompt -> LLM -> Parser) into a single, readable, and maintainable pipeline.
+
+- Native Output Parsing (JsonOutputParser)
+
+    : Instead of manually parsing text with regular expressions (Regex), we use a dedicated parser to convert the AI's natural language response directly into a Python dictionary.
+
+3. What I Learned
+
+- The Power of LCEL
+
+    : I learned how declarative syntax makes AI orchestration much simpler compared to writing manual API calls and handling intermediate data flow.
+
+- Bridging AI and Software Data
+
+    : I understood how Output Parsers act as a "translator" between the LLM's conversational output and the structured data format required by modern applications.
+
+- Prompt-Driven Entity Extraction
+
+    : I experienced how specific instructions (e.g., defining JSON keys) can significantly improrve the consistency and reliability of entity extraction in specialized fields like Bio-Medicine.

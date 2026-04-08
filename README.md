@@ -55,3 +55,20 @@ Edit your .env file based on your current phase.
     
     - Usage
         : Used throughout the engine to process prompts and generate AI responses.
+
+**extract_entities(text)**
+
+    - Description
+        : Specifically designed to identify and categorize Diseases and Drugs using a professional Bio-NLP persona.
+    
+    - Orchestration
+        : Leverages LCEL (LangChain Expression Language) for an efficient Prompt | LLM | Parser pipeline.
+
+    - Execution Example
+        - Input Text:
+            "Patient was prescribed Metformin for Type 2 Diabetes."
+        - Output (JSON):
+            {
+                "diseases": ["Type 2 Diabetes"],
+                "drugs": ["Metformin"]
+            }
