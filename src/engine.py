@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from langchain_community.chat_models import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
+from utils import save_result_to_json
 
 # 1. Load environment variables from .env file
 load_dotenv()
@@ -50,9 +51,6 @@ def extract_entities(text):
 # --- Test Execution ---
 if __name__ == "__main__":
     sample_text = "Patient was prescribed Metformin for Type 2 Diabetes."
-
-    print("--- Extracting Bio-Entities ---")
     result = extract_entities(sample_text)
 
-    # Print the structured result (JSON)
-    print(result)
+    save_result_to_json(result, filename_prefix="bio_extraction")

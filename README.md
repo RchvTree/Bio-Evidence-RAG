@@ -41,6 +41,32 @@ Edit your .env file based on your current phase.
 | Ollama | Local Runtime | Selected for its CLI-centric workflow and ease of integration vs. LM Studio (GUI-only) |
 | python-dotenv | Security | The industry standard for secure credential management over manual os parsing |
 
+## 🗺️ Project Roadmap
+
+| Phase | Description | Status |
+| :--- | :--- | :--- |
+| Phase 1: Entity Recognition | Identifying and classifying 'Disease' and 'Drug' entities from text. | Done ✅ |
+| Phase 2: Relation Extraction | Understanding. relationships (e.g., treats, causes) between identified entities. | Next 🏃‍♀️ |
+| Phase 3: RAG Integration | Augmenting LLM responses with real evidence from PubMed papers (PDF/Text). | TODO 📝 |
+| Phase 4: Deployment | Launching a user-friendly web interface using Streamlit. | TODO 📝 |
+
+## 🏆 Milestone Achieved
+
+### Phase 1
+I have successfully laid a solid foundation for sustainable software development.
+
+    - Infrastructure
+        : Established a professional environment with GitHub integration, virtual environment (venv), secure configuration (.env), and dependency management (requirements.txt)
+
+    - Engine Core
+        : Built a robust interface to communicate with a local LLM (Llama 3.2 via Ollama) using LangChain.
+
+    - Orchestration
+        : Implemented an efficient LCEL (LangChain Expression Language) pipeline
+        : Prompt -> Model -> JSON Parser
+
+    - Data Persistence
+        : Developed an automated storage system in utils.py that saves analysis results with precise timestamps for audit trails.
 
 ## 🚀 Core Functions
 ### engine.py

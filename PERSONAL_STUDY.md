@@ -154,7 +154,17 @@ Defining the "Rulebook" for messages, LCEL, and parsers.
     - JsonOutputParser
         : Converts natural lnaguage AI responses into machine-readable JSON format.
 
+### 💾 Data Persistence
+Why Save Engine Results to Text Files?
 
+    - Data Persistence
+        : AI responses are volatile. Saving them ensures the extracted insights are permanently stored and retrievable.
+
+    - Next Step Preparation
+        : The output of Phase 1 (Entities) serves as the input for Phase 2 (Relations). File storage acts as a bridge between project phases.
+
+    - Batch Processing
+        : Essential for handling large volumes of text systematically without overwhelming the system's memory.
 
 
 ## 🚀 Project Progress
@@ -182,10 +192,10 @@ The get_llm() function serves as the Entry Point for our AI model. It ensures th
 
     : Wrapping model creation in a function keeps the rest of the code clean.
 
-**extract_entities(text)**
+**extract_entities()**
 1. Code Structure
 
-The extract_entities(text) function is the core logic for processing unstructured bio-medical text. It transforms raw input into structured JSON data containing specific entities like 'Diseases' and 'Drugs' by orchestrating a LangChain pipeline.
+The extract_entities() function is the core logic for processing unstructured bio-medical text. It transforms raw input into structured JSON data containing specific entities like 'Diseases' and 'Drugs' by orchestrating a LangChain pipeline.
 
 2. Technical Decisions
 
@@ -214,3 +224,38 @@ The extract_entities(text) function is the core logic for processing unstructure
 - Prompt-Driven Entity Extraction
 
     : I experienced how specific instructions (e.g., defining JSON keys) can significantly improrve the consistency and reliability of entity extraction in specialized fields like Bio-Medicine.
+
+### 🧺 utils.py
+**save_result_to_json()**
+1. Code Structure
+
+This function handles the Data Persistence layer, converting volatile AI-generated data into permanent .json files. It bridges the gap between the execution environment and physical storage for future analysis.
+
+2. Technical Decisions
+
+- Dynamic Filenaming
+
+    : Used strftime("%Y%m%d_%H%M%S") for unique, chronologically sortable identifiers.
+    : strftime (String Format Time)
+
+- Cross-Platform Paths
+
+    : Adopted os.path.join to ensure compatibility across different operating systems by handling path separators automatically.
+
+- Global Standardization
+
+    : Forced utf-8 encoding and disabled ensure_ascii to preserve non-English characters and medical symbols. accurately.
+
+3. What I Learned
+
+- Human-Readable Formatting
+    
+    : Learned how indent=4 improves debugging and data inspection.
+
+- Robustness
+
+    : Realized the importance of verifying directory existence to prevent runtime crashes.
+
+- Pipeline Logic
+
+    : Understood that file I/O is the "connective tissue" between different phases of the project.
