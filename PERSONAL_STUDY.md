@@ -225,6 +225,39 @@ The extract_entities() function is the core logic for processing unstructured bi
 
     : I experienced how specific instructions (e.g., defining JSON keys) can significantly improrve the consistency and reliability of entity extraction in specialized fields like Bio-Medicine.
 
+**extract_bio_knowledge()**
+1. Code Structure
+
+This function identifies complex biological relationships between entities. I designed it to structure information as (Subject, Relation, Object) triplets, converting unstructured text into machine-readable knowledge data.
+
+2. Technical Decisions
+
+- Knowledge Representation (Triplets)
+
+    : I structured the extraction as (S, R, O) triplets to capture complex medical causalities in a standardized format. This allows the data to be easily extended into a Knowledge Graph and enables logical reasoning.
+
+- System Instruction for Complex Prompts
+
+    : To prevent performance degradation as prompts grow longer, I utilized System Instructions. This clearly separates the "Persona and Rules" from the "Input Data", ensuring consistency even within long contexts.
+
+- Structural Escaping with {{}}
+
+    : I used double braces {{}} to resolve syntax conflicts when requesting JSON formats. This informs the prompt template engine to treat the braces as literal characters rather than variable placeholders.
+
+3. What I Learned
+
+- The Power of Triplets Extraction
+
+    : I learned the fundamentals of Knowledge Graphs by breaking down unstructured text into (S, R, O) structures. I realized how much more valuable this format is compared to raw text.
+
+- How to Architect Long-Form Prompts
+
+    : I learned that assigning a system role significantly increases AI accuracy in complex reasoning compared to just listing commands.
+
+- Beyond Backslashes: Syntax Escaping
+
+    : I discovered that different programming environments have unique ways to escape special characters, specifically mastering the {{}} syntax used in template engines.
+
 ### 🧺 utils.py
 **save_result_to_json()**
 1. Code Structure

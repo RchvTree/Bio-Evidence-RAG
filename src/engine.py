@@ -48,9 +48,48 @@ def extract_entities(text):
     response = chain.invoke({"input_text": text})
     return response
 
-# --- Test Execution ---
-if __name__ == "__main__":
-    sample_text = "Patient was prescribed Metformin for Type 2 Diabetes."
-    result = extract_entities(sample_text)
+def extract_bio_knowledge(text):
+    """
+    Extracts entities and their relationships (triplets) from bio-text.
+    """
+    llm = get_llm()
 
-    save_result_to_json(result, filename_prefix="bio_extraction")
+    system_instruction = """
+    You are a professional Bio-NLP scientist.
+    Analyze the text and extract triplets in the format of (Subject, Relation, Object).
+    
+    Return the result in JSON format with the following structure:
+    {{
+        "entities": {{"diseases": [], "drugs": []}},
+        "triplets": [
+            {{"subject": "...", "relation": "...", "object": "..."}}
+        ]
+    }}
+    """
+
+    prompt_template = ChatPromptTemplate.from_messages([
+        ("system", system_instruction),
+        ("user", "Text to analyze: {input_text}")
+    ])
+
+    # Build the chain
+    chain = prompt_template | llm | JsonOutputParser()
+
+    # Execution
+    return chain.invoke({"input_text": text})
+
+# ----- Test Execution -----
+if __name__ == "__main__":
+    # [Ver1_Simple]
+    # simple_text = "Patient was rescribed Metformin for Type 2 Diabetes."
+    # result = extract_entities(sample_text)
+    # save_result_to_json(result, filename_prefix="bio_extraction")
+
+    # [Ver2_Complex]
+    complex_text = "Clinical studies show that Metformin effectively treats Type 2 Diabetes but may cause Vitamin B12 deficiency."
+    print("--- Extracting Complex Bio-Knowledge ---")
+
+    result = extract_bio_knowledge(complex_text)
+    print(result)
+
+    save_result_to_json(result, filename_prefix="knowledge_triplet")

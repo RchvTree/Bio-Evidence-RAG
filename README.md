@@ -82,7 +82,7 @@ I have successfully laid a solid foundation for sustainable software development
     - Usage
         : Used throughout the engine to process prompts and generate AI responses.
 
-**extract_entities(text)**
+**extract_entities()**
 
     - Description
         : Specifically designed to identify and categorize Diseases and Drugs using a professional Bio-NLP persona.
@@ -98,3 +98,30 @@ I have successfully laid a solid foundation for sustainable software development
                 "diseases": ["Type 2 Diabetes"],
                 "drugs": ["Metformin"]
             }
+
+**extract_bio_knowledge()**
+
+    - Description
+        : Identifies and extracts complex biological relationships from text in a structured format.
+
+    - Key Featrues
+        : Structures findings into Triplets (Subject, Relation, Object) for knowledge graph compatibility.
+        : Uses advanced System Instructions to maintain focus and consistency during complex reasoning.
+        : Employs Double Brade Escaping {{}} to safely request JSON outputs without syntax errors.
+
+    - Usage
+        : The core logic for Phase 2 (Relation Extraction), transforming unstructured bio-text into structured knowledge.
+
+### utils.py
+**save_result_to_json()**
+
+    - Description
+        : Persists AI-generated results into a permanent JSON file storage.
+
+    - Key Features
+        : Implements Timestamp-based versioning (YearMonthDay_Time) for clear audit trails.
+        : Uses OS-Agnostic paths via os.path.join to ensure compatibility across Windows, Mac, and Linux.
+        : Guarantees Data Integrity with UTF-8 encoding and human-readable (indent=4) formatting.
+
+    - Usage
+        : Utility function used in the final step of the engine to save and organize all extracted insights.
